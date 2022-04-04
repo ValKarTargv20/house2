@@ -90,9 +90,39 @@ namespace TestHouse
 
             Assert.NotEmpty((System.Collections.IEnumerable)house);
         }
-        public async Task CheckRoomsFloors_areNotZero()
+        [Fact]
+        public async Task CheckRoomsFloors_AreNotZero()
         {
+            int floors;
+            int rooms;
+            HouseDto house = new HouseDto();
 
+            floors = house.Floors;
+            rooms = house.Rooms;
+            if(floors>0 && rooms > 0)
+            {
+                await Svc<IHouseServices>().Add(house);
+            }
+            house.Floors = 0;
+            house.Rooms = 0;
+        }
+
+        [Fact]
+        public async Task CheckCreate_Modified_AreEqual()
+        {
+            DateTime createdAt;
+            DateTime modifiedAt;
+            string guid= "71e6b42e-9d8e-49d2-8ad1-46d64a84ff61";
+
+            HouseDto house = new HouseDto();
+            createdAt = house.CreatedAt;
+            modifiedAt = house.ModifiedAt;
+
+            var insertGuid = Guid.Parse(guid);
+
+            await Svc<IHouseServices>().GetAsync(insertGuid);
+
+            Assert.Equal(modifiedAt, createdAt);
         }
     }
 
