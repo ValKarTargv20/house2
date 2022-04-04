@@ -1,0 +1,46 @@
+﻿@model IEnumerable<house.Models.HouseListViewModel>
+
+@{
+    int quenenumber = 0;
+}
+
+<div>
+    <a asp-action="add" asp-controller="House" type="submit" class="btn btn-danger">Add</a>
+</div>
+
+<form method="post">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th scope="col">Nr</th>
+                <th scope="col">Name</th>
+                <th scope="col">Address</th>
+                <th scope="col">Floors</th>
+                <th scope="col">Rooms</th>
+                <th scope="col">Restrooms</th>
+                <th scope="col">Yard</th>
+                <th scope="col">Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var house in Model)
+            {
+                quenenumber++;
+                <tr>
+                    <td class="">@quenenumber</td>
+                    <td class="">@house.Name</td>
+                    <td class="">@house.Address</td>
+                    <td class="">@house.Floors</td>
+                    <td class="">@house.Rooms</td>
+                    <td class="">@house.Restrooms</td>
+                    <td class="">@house.Yard</td>
+                    <td class="">@house.Price</td>
+                    <td>
+                        <a asp-action="edit" asp-controller="house" asp-route-id="@house.Id" class="btn btn-primary">Edit House</a>
+                        <input asp-action="delete" asp-controller="house" asp-route-id="@house.Id" type="submit" class="btn btn-danger" value="Delete">
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</form>
