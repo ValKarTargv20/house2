@@ -70,7 +70,7 @@ namespace TestHouse
         }
 
         [Fact]
-        public async Task Should_UpdateByIdHouse_WhenUpdateSpaceship()
+        public async Task Should_UpdateByIdHouse_WhenUpdateHouse()
         {
             string guid = "2e7d2eef-5e0d-485c-9ae6-5e832a9e9272";
 
@@ -89,6 +89,10 @@ namespace TestHouse
             await Svc<IHouseServices>().Update(house);
 
             Assert.NotEmpty((System.Collections.IEnumerable)house);
+        }
+        public async Task CheckRoomsFloors_areNotZero()
+        {
+
         }
     }
 
